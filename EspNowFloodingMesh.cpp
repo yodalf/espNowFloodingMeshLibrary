@@ -103,7 +103,7 @@ static void (*espNowFloodingMesh_receive_cb)(const uint8_t *, int, uint32_t) = N
 
 uint16_t calculateCRC(int c, const unsigned char*b,int len);
 uint16_t calculateCRC(struct meshFrame *m);
-int decrypt(const uint8_t *_from, struct meshFrame *m, int size);
+void decrypt(const uint8_t *_from, struct meshFrame *m, int size);
 bool compareTime(time_t current, time_t received, time_t maxDifference);
 
 
