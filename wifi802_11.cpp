@@ -108,7 +108,7 @@ void wifi_802_receive_cb(void(*cb)(const uint8_t *, int, uint8_t)) {
     wifi_802_receive_callback = cb;
 }
 
-void wifi_802_11_send(const uint8_t *d, int len) {
+void wifi_802_11_send(const uint8_t *d, unsigned int len) {
   uint8_t buf[500];
   for(int i=0;i<5;i++){
   if(len>sizeof(buf)-sizeof(raw_HEADER)-2) return;
