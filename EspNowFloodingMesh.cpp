@@ -783,7 +783,7 @@ uint32_t espNowFloodingMesh_sendAndHandleReply(uint8_t* msg, int size, int ttl, 
   return sendMsg(msg, size, ttl, USER_REQUIRE_RESPONSE_MSG, (void*)f);
 }
 
-bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tryCount, void (*f)(const uint8_t *, int), unsigned int timeoutMs, int expectedCountOfReplies){
+bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tryCount, void (*f)(const uint8_t *, int), int timeoutMs, int expectedCountOfReplies){
   static int replyCnt=0;
   static void (*callback)(const uint8_t *, int);
   callback = f;
@@ -805,7 +805,7 @@ bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tr
         return true; //OK all received;
       }
       unsigned long elapsed = millis()-dbtm;
-      if(elapsed>timeoutMs) {
+      if(elapsed> (unsigned int)timeoutMs) {
         //timeout
         print(0, "Timeout: waiting replies");
         break;
