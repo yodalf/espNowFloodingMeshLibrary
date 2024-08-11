@@ -584,7 +584,7 @@ void espNowFloodingMesh_end() {
 
 //   void setSendCb(function<void(void)> f)
 #ifndef USE_RAW_801_11
-void espNowFloodingMesh_begin(int channel, int bsid) {
+void espNowFloodingMesh_begin(int channel, unsigned int bsid) {
 #else
 void espNowFloodingMesh_begin(int channel, char bsId[6]) {
 #endif
