@@ -402,7 +402,7 @@ bool compareTime(time_t current, time_t received, time_t maxDifference) {
 }
 
 #ifdef USE_RAW_801_11
-void msg_recv_cb(const uint8_t *data, int len, uint8_t rssi)
+void msg_recv_cb(const uint8_t *data, unsigned int len, uint8_t rssi)
 #else
   void msg_recv_cb(const uint8_t *data, int len)
 #endif
@@ -442,10 +442,10 @@ void msg_recv_cb(const uint8_t *data, int len, uint8_t rssi)
     }
     if(m.encrypted.header.length>=0 && m.encrypted.header.length < (sizeof(m.encrypted.data) ) ){
       uint16_t crc = m.unencrypted.crc16;
-      int messageLengtWithHeader = m.encrypted.header.length + sizeof(struct header);
       uint16_t crc16 = calculateCRC(&m);
 
         #ifdef DEBUG_PRINTS
+        int messageLengtWithHeader = m.encrypted.header.length + sizeof(struct header);
         Serial.print("REC:");
         hexDump((uint8_t*)&m,messageLengtWithHeader);
         #endif
@@ -708,7 +708,7 @@ bool forwardMsg(const uint8_t *data, int len) {
 }
 
 
-uint32_t sendMsg(uint8_t* msg, int size, int ttl, int msgId, void *ptr) {
+uint32_t sendMsg(uint8_t* msg, unsigned int size, int ttl, int msgId, void *ptr) {
   uint32_t ret=0;
   if(size>=sizeof(struct mesh_secred_part)) {
     #ifdef DEBUG_PRINTS
@@ -783,7 +783,7 @@ uint32_t espNowFloodingMesh_sendAndHandleReply(uint8_t* msg, int size, int ttl, 
   return sendMsg(msg, size, ttl, USER_REQUIRE_RESPONSE_MSG, (void*)f);
 }
 
-bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tryCount, void (*f)(const uint8_t *, int), int timeoutMs, int expectedCountOfReplies){
+bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tryCount, void (*f)(const uint8_t *, int), unsigned int timeoutMs, int expectedCountOfReplies){
   static int replyCnt=0;
   static void (*callback)(const uint8_t *, int);
   callback = f;
@@ -815,7 +815,7 @@ bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tr
   return false;
 }
 
-bool espNowFloodingMesh_syncWithMasterAndWait(int timeoutMs, int tryCount) {
+bool espNowFloodingMesh_syncWithMasterAndWait(unsigned int timeoutMs, int tryCount) {
   if(masterFlag || timeStampCheckDisabled) return true;
   syncronized = false;
   for(int i=0;i<tryCount;i++) {
