@@ -404,7 +404,7 @@ bool compareTime(time_t current, time_t received, time_t maxDifference) {
 #ifdef USE_RAW_801_11
 void msg_recv_cb(const uint8_t *data, unsigned int len, uint8_t rssi)
 #else
-  void msg_recv_cb(const uint8_t *data, int len)
+  void msg_recv_cb(const uint8_t *data, unsigned int len)
 #endif
 {
   #ifdef DEBUG_PRINTS
