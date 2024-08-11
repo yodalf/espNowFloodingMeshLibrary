@@ -402,9 +402,9 @@ bool compareTime(time_t current, time_t received, time_t maxDifference) {
 }
 
 #ifdef USE_RAW_801_11
-void msg_recv_cb(const uint8_t *data, unsigned int len, uint8_t rssi)
+void msg_recv_cb(const uint8_t *data, int len, uint8_t rssi)
 #else
-  void msg_recv_cb(const uint8_t *data, unsigned int len)
+  void msg_recv_cb(const uint8_t *data, int len)
 #endif
 {
   #ifdef DEBUG_PRINTS
@@ -419,7 +419,7 @@ void msg_recv_cb(const uint8_t *data, unsigned int len, uint8_t rssi)
       //Serial.println(m.unencrypted.getBsid(), HEX);
       return;
     }
-    if(len>=sizeof(struct meshFrame)) return;
+    if((unsigned int) len>=sizeof(struct meshFrame)) return;
 
     int messageStatus = rejectedMessageDB.isMessageInHandledList(&m);
     if(messageStatus==1) {
@@ -584,7 +584,7 @@ void espNowFloodingMesh_end() {
 
 //   void setSendCb(function<void(void)> f)
 #ifndef USE_RAW_801_11
-void espNowFloodingMesh_begin(int channel, unsigned int bsid) {
+void espNowFloodingMesh_begin(int channel, int bsid) {
 #else
 void espNowFloodingMesh_begin(int channel, char bsId[6]) {
 #endif
