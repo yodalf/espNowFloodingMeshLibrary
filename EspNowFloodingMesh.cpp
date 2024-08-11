@@ -829,7 +829,7 @@ bool espNowFloodingMesh_syncWithMasterAndWait(int timeoutMs, int tryCount) {
           return true; //OK all received;
         }
         unsigned long elapsed = millis()-dbtm;
-        if(elapsed>(unsigneds int) timeoutMs) {
+        if(elapsed>(unsigned int) timeoutMs) {
           break;
         }
       }
