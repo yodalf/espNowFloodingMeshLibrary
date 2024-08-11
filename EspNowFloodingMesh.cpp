@@ -815,7 +815,7 @@ bool espNowFloodingMesh_sendAndWaitReply(uint8_t* msg, int size, int ttl, int tr
   return false;
 }
 
-bool espNowFloodingMesh_syncWithMasterAndWait(unsigned int timeoutMs, int tryCount) {
+bool espNowFloodingMesh_syncWithMasterAndWait(int timeoutMs, int tryCount) {
   if(masterFlag || timeStampCheckDisabled) return true;
   syncronized = false;
   for(int i=0;i<tryCount;i++) {
@@ -829,7 +829,7 @@ bool espNowFloodingMesh_syncWithMasterAndWait(unsigned int timeoutMs, int tryCou
           return true; //OK all received;
         }
         unsigned long elapsed = millis()-dbtm;
-        if(elapsed>timeoutMs) {
+        if(elapsed>(unsigneds int) timeoutMs) {
           break;
         }
       }
