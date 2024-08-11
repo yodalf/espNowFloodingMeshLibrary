@@ -47,7 +47,7 @@ bool timeStampCheckDisabled = false;
 uint8_t syncTTL = 0;
 bool isespNowFloodingMeshInitialized = false;
 time_t time_fix_value;
-int myBsid = 0x112233;
+unsigned int myBsid = 0x112233;
 
 #pragma pack(push,1)
 struct header{
@@ -90,7 +90,7 @@ struct meshFrame{
   unencrypted_t unencrypted;
   struct mesh_secred_part encrypted;
 };
-#pragma pack(pop);
+#pragma pack(pop)
 int espNowFloodingMesh_getTTL() {
     return syncTTL;
 }
@@ -271,7 +271,7 @@ void espNowFloodingMesh_RecvCB(void (*callback)(const uint8_t *, int, uint32_t))
 }
 
 void espNowFloodingMesh_delay(unsigned long tm) {
-  for(int i=0;i<(tm/10);i++){
+  for(unsigned long i=0;i<(tm/10);i++){
     espNowFloodingMesh_loop();
     delay(10);
   }
