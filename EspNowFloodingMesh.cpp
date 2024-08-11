@@ -710,7 +710,7 @@ bool forwardMsg(const uint8_t *data, int len) {
 
 uint32_t sendMsg(uint8_t* msg, int size, int ttl, int msgId, void *ptr) {
   uint32_t ret=0;
-  if(size>=sizeof(struct mesh_secred_part)) {
+  if((unsigned int) size>=sizeof(struct mesh_secred_part)) {
     #ifdef DEBUG_PRINTS
     Serial.println("espNowFloodingMesh_send: Invalid size");
     #endif
